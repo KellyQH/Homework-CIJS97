@@ -1,0 +1,10 @@
+
+.app {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-content: center;
+    gap: 0 10px;
+
+}
+  
+  

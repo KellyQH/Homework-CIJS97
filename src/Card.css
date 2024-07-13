@@ -1,0 +1,79 @@
+.card { 
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;    
+    color: white;
+
+  }
+  
+  .card img {
+    width: 100%;
+    height: auto;
+    background: #2d2d2d;  
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 10px;
+}
+  
+  .card h2 {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 25px; 
+  }
+  
+  .card p {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 15px; 
+    color: #b3b3b3; 
+  }
+  
+  .card .types {
+    margin: 5px;
+    display: flex;
+    padding: 5px 10px;
+    gap: 10px;
+  }
+
+  .card .types span {
+    padding: 3px;
+    border-radius: 5px; 
+  }
+
+  .card .typeGrass {
+    background: #78C850;
+  }
+  
+  .card .typePoison {
+    background: #A040A0;
+  }
+  
+  .card .typeFire {
+    background: #F08030;
+  }
+  
+  .card .typeWater {
+    background: #6890F0;
+  }
+  
+  .card .typeBug {
+    background: #A8B820;
+  }
+  
+  .card .typeFlying {
+    background: linear-gradient(rgb(61, 61, 186),  #050406);
+  }
+  
+  .card button {
+    padding: 5px 10px; 
+    border-radius: 5px;
+    background: #3b3b3b;
+    color: white; 
+    border: none; 
+  }
+
+  .card .wrapper {
+    display: flex; 
+  }
