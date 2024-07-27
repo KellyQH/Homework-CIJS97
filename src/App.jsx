@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from './Card.jsx';
+import './App.css';
+import Modal from './components/Modal.jsx';
+import './Card.css';
 
 import bulbasaur from './assets/bulbasaur.png';
 import ivysaur from './assets/ivysaur.png';
@@ -14,10 +17,8 @@ import caterpie from './assets/caterpie.png';
 import metapod from './assets/metapod.png';
 import butterfree from './assets/butterfree.png';
 
-import './App.css';
-
-const pokemons = [
-  { number: '#0001', name: 'Bulbasaur', types: ['Grass', 'Poison'], image: bulbasaur},
+const initialPokemons = [
+  { number: '#0001', name: 'Bulbasaur', types: ['Grass', 'Poison'], image: bulbasaur },
   { number: '#0002', name: 'Ivysaur', types: ['Grass', 'Poison'], image: ivysaur },
   { number: '#0003', name: 'Venusaur', types: ['Grass', 'Poison'], image: venusaur },
   { number: '#0004', name: 'Charmander', types: ['Fire'], image: charmander },
@@ -31,17 +32,56 @@ const pokemons = [
   { number: '#0012', name: 'Butterfree', types: ['Bug', 'Flying'], image: butterfree },
 ];
 
-
-
 function App() {
-    return (
-        <div className="app">
-            {pokemons.map(pokemon => (
-              // maps over the pokemons array, creating a Card component for each Pokemon
-                <Card key={pokemon.number} pokemon={pokemon} /> //unique key, set to Pokemon number.
-            ))}
-        </div>
+  const [pokemons, setPokemons] = useState(initialPokemons);
+  const [open, setOpen] = useState(false);
+  const [selectedPokemon, setSelectedPokemon] = useState(null);
+  const [value, setValue] = useState("");
+  const [filteredCard, setFilteredCard] = useState(initialPokemons);
+
+  const handleOpen = (pokemon) => {
+    setOpen(true);
+    setSelectedPokemon(pokemon);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedPokemon(null);
+  };
+
+  const handleSave = (updatedPokemon) => {
+    setPokemons((prevPokemons) =>
+      prevPokemons.map((pokemon) =>
+        pokemon.number === updatedPokemon.number ? updatedPokemon : pokemon
+      )
     );
+  };
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      const cardList = pokemons.map(pokemon => ({...pokemon, title: `${pokemon.number} - ${pokemon.name}` }));
+      const result = cardList.filter(card => card.title.toLowerCase().includes(value.toLowerCase()));
+      setFilteredCard(result);
+    }, 300);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, pokemons]);
+
+  return (
+    <div>
+      <div>
+        <label>Search here </label>
+        <input onChange={(e) => setValue(e.target.value)} />
+      </div>
+      <div className="app">
+        {filteredCard.map((pokemon) => (
+          <Card key={pokemon.number} pokemon={pokemon} onOpen={handleOpen} />
+        ))}
+      </div>
+      <Modal isOpen={open} onClose={handleClose} onSave={handleSave} pokemon={selectedPokemon} />
+    </div>
+  );
 }
 
 export default App;

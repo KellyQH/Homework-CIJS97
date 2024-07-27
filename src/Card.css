@@ -5,6 +5,10 @@
     color: white;
 
   }
+
+  .card :hover{
+    cursor: pointer;
+  }
   
   .card img {
     width: 100%;
@@ -77,3 +81,24 @@
   .card .wrapper {
     display: flex; 
   }
+
+  .pokemonIMG {
+    width: 80%;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+  .modalIMG {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .modalDetails {
+    text-align: center;
+  }
+  
